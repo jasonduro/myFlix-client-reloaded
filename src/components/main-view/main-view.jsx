@@ -1,3 +1,5 @@
+// This is the main view of the app, which will be rendered by the main component (index.jsx). It will display a list of movies. When a user clicks on a movie, the app will display information about that movie, and a button that will return the user to the main view. This component will be a "smart" component because it will maintain state, in this case the list of movies and the selected movie.
+
 import React from "react";
 import { useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";

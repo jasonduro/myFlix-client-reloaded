@@ -1,3 +1,5 @@
+// This is the JavaScript entry point - your code begins here.
+
 import { createRoot } from "react-dom/client";
 import MainView from "./components/main-view/main-view";
 
