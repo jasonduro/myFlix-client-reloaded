@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
+import { SignupView } from "../signup-view/signup-view";
 
 const MainView = () => {
 	const [movies, setMovies] = useState([]);
@@ -13,7 +14,10 @@ const MainView = () => {
 	const [token, setToken] = useState(null);
 
 	useEffect(() => {
-		fetch("https://myflix-app-jl.herokuapp.com/movies")
+		if (!token) return;
+		fetch("https://myflix-app-jl.herokuapp.com/movies", {
+			headers: { Authorization: `Bearer ${token}` },
+		})
 			.then((response) => response.json())
 			.then((data) => {
 				const moviesFromApi = data.map((movie) => {
@@ -29,34 +33,23 @@ const MainView = () => {
 
 				setMovies(moviesFromApi);
 			});
-	}, []);
-	/* the above code might be then((movies) instead of data. also movies.map instead of data */
-
-	if (!user) {
-		return (
-			<LoginView
-				onLoggedIn={(user, token) => {
-					setUser(user);
-					setToken(token);
-				}}
-			/>
-		);
-	}
-
-	/* second useEffect function below to pass Bearer authorization in the header of http requests to make authenticated requests to api */
-	useEffect(() => {
-		if (!token) return;
-
-		fetch("https://myflix-app-jl.herokuapp.com/movies", {
-			headers: { Authorization: `Bearer ${token}` },
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				console.log(data);
-			});
 	}, [token]);
 
 	/* these three functions below are represented by the variables above - the const [] = use state.  */
+	if (!user) {
+		return (
+			<>
+				<LoginView
+					onLoggedIn={(user, token) => {
+						setUser(user);
+						setToken(token);
+					}}
+				/>
+				or
+				<SignupView />
+			</>
+		);
+	}
 
 	if (selectedMovie) {
 		return (
@@ -70,7 +63,7 @@ const MainView = () => {
 	if (movies.length === 0) {
 		return <div>The list is empty!</div>;
 	}
-	e;
+
 	return (
 		<div>
 			{movies.map((movie) => (
