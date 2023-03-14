@@ -30,8 +30,20 @@ const MainView = () => {
 				setMovies(moviesFromApi);
 			});
 	}, []);
+	/* the above code might be then((movies) instead of data. also movies.map instead of data */
 
-	/* second useEffect function below to pass Bearer authorization in the header of http requests to mkae authenticated requests to api */
+	if (!user) {
+		return (
+			<LoginView
+				onLoggedIn={(user, token) => {
+					setUser(user);
+					setToken(token);
+				}}
+			/>
+		);
+	}
+
+	/* second useEffect function below to pass Bearer authorization in the header of http requests to make authenticated requests to api */
 	useEffect(() => {
 		if (!token) return;
 
@@ -44,20 +56,7 @@ const MainView = () => {
 			});
 	}, [token]);
 
-	/* the above code might be then((movies) instead of data. also movies.map instead of data */
-
 	/* these three functions below are represented by the variables above - the const [] = use state.  */
-
-	if (!user) {
-		return (
-			<LoginView
-				onLoggedIn={(user, token) => {
-					setUser(user);
-					setToken(token);
-				}}
-			/>
-		);
-	}
 
 	if (selectedMovie) {
 		return (
