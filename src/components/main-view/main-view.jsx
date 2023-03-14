@@ -1,43 +1,33 @@
 // This is the main view of the app, which will be rendered by the main component (index.jsx). It will display a list of movies. When a user clicks on a movie, the app will display information about that movie, and a button that will return the user to the main view. This component will be a "smart" component because it will maintain state, in this case the list of movies and the selected movie.
 
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 
 const MainView = () => {
-	const [movies, setMovies] = useState([
-		{
-			id: 1,
-			title: "Eloquent JavaScript",
-			image: "https://picsum.photos/300",
-			director: "Marijn Haverbeke",
-		},
-		{
-			id: 2,
-			title: "Mastering JavaScript Functional Programming",
-			image: "https://picsum.photos/400",
-			director: "Marijn Haverbeke",
-		},
-		{
-			id: 3,
-			title: "JavaScript: The Good Parts",
-			image: "https://picsum.photos/400",
-			director: "Marijn Haverbeke",
-		},
-		{
-			id: 4,
-			title: "JavaScript: The Definitive Guide",
-			image: "https://picsum.photos/400",
-			director: "Marijn Haverbeke",
-		},
-		{
-			id: 5,
-			title: "The Road to React",
-			image: "https://picsum.photos/400",
-			director: "Marijn Haverbeke",
-		},
-	]);
+	const [movies, setMovies] = useState([]);
+
+	useEffect(() => {
+		fetch("https://myflix-app-jl.herokuapp.com/movies")
+			.then((response) => response.json())
+			.then((data) => {
+				const moviesFromApi = data.map((movie) => {
+					return {
+						id: movie._id,
+						title: movie.Title,
+						image: movie.ImagePath,
+						director: movie.Director.Name,
+						description: movie.Description,
+						genre: movie.Genre.Name,
+					};
+				});
+
+				setMovies(moviesFromApi);
+			});
+	}, []);
+
+	/* the above code might be then((movies) instead of data. also movies.map instead of data */
 
 	const [selectedMovie, setSelectedMovie] = useState(null);
 
