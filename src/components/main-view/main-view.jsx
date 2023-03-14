@@ -31,9 +31,23 @@ const MainView = () => {
 			});
 	}, []);
 
+	/* second useEffect function below to pass Bearer authorization in the header of http requests to mkae authenticated requests to api */
+	useEffect(() => {
+		if (!token) return;
+
+		fetch("https://myflix-app-jl.herokuapp.com/movies", {
+			headers: { Authorization: `Bearer ${token}` },
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+			});
+	}, [token]);
+
 	/* the above code might be then((movies) instead of data. also movies.map instead of data */
 
 	/* these three functions below are represented by the variables above - the const [] = use state.  */
+
 	if (!user) {
 		return (
 			<LoginView
@@ -69,7 +83,15 @@ const MainView = () => {
 					}}
 				/>
 			))}
-			<button onClick={() => setUser(null)}>Log Out</button>
+			<button
+				onClick={() => {
+					setUser(null);
+					setToken(null);
+					localStorage.clear();
+				}}
+			>
+				Log Out
+			</button>
 		</div>
 	);
 };
