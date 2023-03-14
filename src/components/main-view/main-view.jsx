@@ -4,9 +4,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+import { LoginView } from "../login-view/login-view";
 
 const MainView = () => {
 	const [movies, setMovies] = useState([]);
+	const [selectedMovie, setSelectedMovie] = useState(null);
+	const [user, setUser] = useState(null);
+	const [token, setToken] = useState(null);
 
 	useEffect(() => {
 		fetch("https://myflix-app-jl.herokuapp.com/movies")
@@ -29,7 +33,17 @@ const MainView = () => {
 
 	/* the above code might be then((movies) instead of data. also movies.map instead of data */
 
-	const [selectedMovie, setSelectedMovie] = useState(null);
+	/* these three functions below are represented by the variables above - the const [] = use state.  */
+	if (!user) {
+		return (
+			<LoginView
+				onLoggedIn={(user, token) => {
+					setUser(user);
+					setToken(token);
+				}}
+			/>
+		);
+	}
 
 	if (selectedMovie) {
 		return (
@@ -43,7 +57,7 @@ const MainView = () => {
 	if (movies.length === 0) {
 		return <div>The list is empty!</div>;
 	}
-
+	e;
 	return (
 		<div>
 			{movies.map((movie) => (
@@ -55,6 +69,7 @@ const MainView = () => {
 					}}
 				/>
 			))}
+			<button onClick={() => setUser(null)}>Log Out</button>
 		</div>
 	);
 };
