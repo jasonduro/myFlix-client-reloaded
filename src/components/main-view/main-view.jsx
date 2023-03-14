@@ -35,7 +35,7 @@ const MainView = () => {
 			});
 	}, [token]);
 
-	/* these three functions below are represented by the variables above - the const [] = use state.  */
+	/* these three functions below are represented by the variables above - the const [] = use state. hooks */
 	if (!user) {
 		return (
 			<>

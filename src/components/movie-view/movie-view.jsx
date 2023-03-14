@@ -1,5 +1,6 @@
 // Purpose: To display a single movie's details to the user. This component is a child of the main-view component. It is rendered when the user clicks on a movie card. It displays the movie's title, director, and image. It also has a button that allows the user to return to the main view.
 import PropTypes from "prop-types";
+import "./movie-view.scss";
 
 export const MovieView = ({ movie, onBackClick }) => {
 	return (
@@ -15,7 +16,13 @@ export const MovieView = ({ movie, onBackClick }) => {
 				<span>Director: </span>
 				<span>{movie.director}</span>
 			</div>
-			<button onClick={onBackClick}>Back</button>
+			<button
+				onClick={onBackClick}
+				className='back-button'
+				style={{ cursor: "pointer" }}
+			>
+				Back
+			</button>
 		</div>
 	);
 };
