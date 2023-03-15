@@ -1,8 +1,16 @@
 // Purpose: To display a single movie's details to the user. This component is a child of the main-view component. It is rendered when the user clicks on a movie card. It displays the movie's title, director, and image. It also has a button that allows the user to return to the main view.
+
+import React from "react";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./movie-view.scss";
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movie }) => {
+	const { movieId } = useParams();
+
+	const movie = movies.find((m) => m._id === movieId);
+
 	return (
 		<div>
 			<div>
@@ -16,13 +24,15 @@ export const MovieView = ({ movie, onBackClick }) => {
 				<span>Director: </span>
 				<span>{movie.director}</span>
 			</div>
-			<button
-				onClick={onBackClick}
-				className='back-button'
-				style={{ cursor: "pointer" }}
-			>
-				Back
-			</button>
+			<Link to={`/`}>
+				<button
+					onClick={onBackClick}
+					className='back-button'
+					style={{ cursor: "pointer" }}
+				>
+					Back
+				</button>
+			</Link>
 		</div>
 	);
 };
