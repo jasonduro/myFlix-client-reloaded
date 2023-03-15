@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./movie-view.scss";
 
-export const MovieView = ({ movies }) => {
+export const MovieView = ({ movies, onBackClick }) => {
 	const { movieId } = useParams();
 
 	const movie = movies.find((m) => m._id === movieId);
@@ -18,11 +18,19 @@ export const MovieView = ({ movies }) => {
 			</div>
 			<div>
 				<span>Title: </span>
-				<span>{movie.title}</span>
+				<p>{movie.Title}</p>
+			</div>
+			<div>
+				<span>Description: </span>
+				<p>{movie.Description}</p>
 			</div>
 			<div>
 				<span>Director: </span>
-				<span>{movie.director}</span>
+				<p>{movie.Director.Name}</p>
+			</div>
+			<div>
+				<span>Genre: </span>
+				<p>{movie.Genre.Name}</p>
 			</div>
 			<Link to={`/`}>
 				<button

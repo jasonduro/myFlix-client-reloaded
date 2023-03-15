@@ -39,7 +39,7 @@ export const LoginView = ({ onLoggedIn }) => {
 
 	return (
 		<>
-			<h1>MyFlix Login</h1>
+			<h1 className='mb-3 mt-3'>MyFlix Login</h1>
 			<Form onSubmit={handleSubmit}>
 				<Form.Group className='mb-3' controlId='formUsername'>
 					<Form.Label>Username</Form.Label>
