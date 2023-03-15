@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./movie-view.scss";
 
-export const MovieView = ({ movie }) => {
+export const MovieView = ({ movies }) => {
 	const { movieId } = useParams();
 
 	const movie = movies.find((m) => m._id === movieId);
@@ -14,7 +14,7 @@ export const MovieView = ({ movie }) => {
 	return (
 		<div>
 			<div>
-				<img src={movie.image} alt='movie poster image' />
+				<img src={movie.ImagePath} alt='movie poster image' />
 			</div>
 			<div>
 				<span>Title: </span>
@@ -41,7 +41,6 @@ MovieView.propTypes = {
 	movie: PropTypes.shape({
 		title: PropTypes.string,
 		director: PropTypes.string,
-		image: PropTypes.string,
 	}).isRequired,
 	onBackClick: PropTypes.func.isRequired,
 };

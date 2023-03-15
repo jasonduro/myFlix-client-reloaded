@@ -9,6 +9,7 @@ import { SignupView } from "../signup-view/signup-view";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { NavigationBar } from "../navigation-bar/navigation-bar";
 
 const MainView = () => {
 	const [movies, setMovies] = useState([]);
@@ -39,6 +40,13 @@ const MainView = () => {
 
 	return (
 		<BrowserRouter>
+			<NavigationBar
+				user={user}
+				onLoggedOut={() => {
+					setUser(null);
+					setToken(null);
+				}}
+			/>
 			<Row className='justify-content-md-center'>
 				<Routes>
 					<Route
