@@ -9,7 +9,8 @@ import { Button, Card, Container, Row, Col } from "react-bootstrap";
 import "./movie-view.scss";
 
 export const MovieView = ({ movies, onBackClick }) => {
-	const [user, setUser] = useState(null);
+	const [user, setUser] = useState("");
+	const [token, setToken] = useState("");
 	const { movieId } = useParams();
 	const movie = movies.find((m) => m._id === movieId);
 
@@ -28,7 +29,7 @@ export const MovieView = ({ movies, onBackClick }) => {
 			.then((response) => response.json())
 			.then((data) => {
 				alert("Movie added to favorites!");
-				setUser({ ...user, FavoriteMovies: data.FavoriteMovies });
+				setUser({ user, FavoriteMovies: data.FavoriteMovies });
 			})
 			.catch((e) => {
 				console.log(e);

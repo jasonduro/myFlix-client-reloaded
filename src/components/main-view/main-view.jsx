@@ -95,12 +95,7 @@ const MainView = () => {
 								) : movies.length === 0 ? (
 									<Col>The list is empty!</Col>
 								) : (
-									<Col
-										xs={12}
-										sm={4}
-										md={8}
-										style={{ border: "1px solid black" }}
-									>
+									<Col xs={12} style={{ border: "1px solid black" }}>
 										<MovieView movies={movies} user={user} token={token} />
 									</Col>
 								)}
