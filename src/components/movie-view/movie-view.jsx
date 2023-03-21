@@ -6,6 +6,7 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Button, Card, Container, Row, Col } from "react-bootstrap";
+import Image from "react-bootstrap/Image";
 import "./movie-view.scss";
 
 export const MovieView = ({ movies, onBackClick }) => {
@@ -61,35 +62,31 @@ export const MovieView = ({ movies, onBackClick }) => {
 	};
 
 	return (
-		<div>
-			<div>
-				<img src={movie.ImagePath} alt='movie poster image' />
-			</div>
-			<div>
-				<span>Title: </span>
-				<p>{movie.Title}</p>
-			</div>
-			<div>
-				<span>Description: </span>
-				<p>{movie.Description}</p>
-			</div>
-			<div>
-				<span>Director: </span>
-				<p>{movie.Director.Name}</p>
-			</div>
-			<div>
-				<span>Genre: </span>
-				<p>{movie.Genre.Name}</p>
-			</div>
-			<Link to={`/`}>
-				<button
-					onClick={onBackClick}
-					className='back-button'
-					style={{ cursor: "pointer" }}
-				>
-					Back
-				</button>
-			</Link>
-		</div>
+		<Container>
+			<Row>
+				<Col sm={6}>
+					<img src={movie.ImagePath} alt='movie poster image' />
+				</Col>
+				<Col sm={6}>
+					<span>Title: </span>
+					<p>{movie.Title}</p>
+					<span>Description: </span>
+					<p>{movie.Description}</p>
+					<span>Director: </span>
+					<p>{movie.Director.Name}</p>
+					<span>Genre: </span>
+					<p>{movie.Genre.Name}</p>
+					<Link to={`/`}>
+						<button
+							onClick={onBackClick}
+							className='back-button'
+							style={{ cursor: "pointer" }}
+						>
+							Back
+						</button>
+					</Link>
+				</Col>
+			</Row>
+		</Container>
 	);
 };
