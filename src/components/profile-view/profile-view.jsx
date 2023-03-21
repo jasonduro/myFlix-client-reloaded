@@ -100,7 +100,7 @@ export const ProfileView = ({ movies, user, token }) => {
 					<Col xs={12} md={6} lg={6}>
 						<Card>
 							<Card.Body>
-								<Card.Title>My Profile</Card.Title>
+								<Card.Title className='mb-3'>My Profile</Card.Title>
 								<UserInfo
 									name={user.Username}
 									email={user.Email}
