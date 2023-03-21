@@ -90,13 +90,6 @@ export const MovieView = ({ movies, onBackClick }) => {
 					Back
 				</button>
 			</Link>
-			<div>
-				{" "}
-				<Button onClick={addOnClick}>+ Add</Button>
-				<Button variant='secondary' onClick={removeOnClick}>
-					- Remove
-				</Button>
-			</div>
 		</div>
 	);
 };
