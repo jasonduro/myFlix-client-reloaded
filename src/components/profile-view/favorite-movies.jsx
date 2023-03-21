@@ -1,21 +1,21 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
+import { MovieCard } from "../movie-card/movie-card";
 
 export function FavoriteMovies({ favoriteMovieCards }) {
 	return (
 		<>
 			<Row>
-				<Col xs={6}>
+				<Col>
 					<h3>Favorite Movies List</h3>
 				</Col>
 			</Row>
 			<Row>
 				{favoriteMovieCards.map}
-				<Col xs={12}>
+				<Col>
 					{favoriteMovieCards.length > 0 ? (
-						<Col xs={12} md={6} lg={3}>
+						<Col xs={12} style={{ border: "1px solid black" }}>
 							{favoriteMovieCards}
 						</Col>
 					) : (
