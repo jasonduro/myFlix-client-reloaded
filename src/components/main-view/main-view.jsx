@@ -28,17 +28,6 @@ const MainView = () => {
 			.then((data) => setMovies(data));
 	}, [token]);
 
-	/* 				const moviesFromApi = data.map((movie) => {
-					return {
-						id: movie._id,
-						title: movie.Title,
-						image: movie.ImagePath,
-						director: movie.Director.Name,
-						description: movie.Description,
-						genre: movie.Genre.Name,
-					};
-				}); */
-
 	return (
 		<BrowserRouter>
 			<NavigationBar
