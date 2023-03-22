@@ -85,6 +85,12 @@ export const MovieView = ({ movies, onBackClick }) => {
 							Back
 						</button>
 					</Link>
+					<Button variant='success' onClick={addOnClick}>
+						Add to Favorites
+					</Button>
+					<Button variant='danger' onClick={removeOnClick}>
+						Remove from Favorites
+					</Button>
 				</Col>
 			</Row>
 		</Container>
