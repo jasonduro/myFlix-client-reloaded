@@ -94,7 +94,7 @@ Terminal Command: `parcel src/index.html`
               <td>/users/:Username</td>
               <td>DELETE</td>
               <td>None</td>
-              <td>A text message saying user has been deleted</td>
+              <td>An alert message saying user has been deleted</td>
             </tr>
           </tbody>
         </table>
