@@ -1,7 +1,7 @@
 // Purpose: To display a single movie's details to the user. This component is a child of the main-view component. It is rendered when the user clicks on a movie card. It displays the movie's title, director, and image. It also has a button that allows the user to return to the main view.
 
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -10,8 +10,8 @@ import Image from "react-bootstrap/Image";
 import "./movie-view.scss";
 
 export const MovieView = ({ movies, onBackClick }) => {
-	const [user, setUser] = useState("");
-	const [token, setToken] = useState("");
+	const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+	const [token, setToken] = useState(localStorage.getItem("token"));
 	const { movieId } = useParams();
 	const movie = movies.find((m) => m._id === movieId);
 
@@ -21,17 +21,20 @@ export const MovieView = ({ movies, onBackClick }) => {
 		fetch(
 			`https://myflix-app-jl.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
 			{
-				method: "PUT",
+				method: "POST",
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
 			}
 		)
 			.then((response) => response.json())
-			.then((data) => {
-				alert("Movie added to favorites!");
-				setUser({ user, FavoriteMovies: data.FavoriteMovies });
-			})
+			.then(
+				(data) => {
+					alert("Movie added to favorites!");
+					setUser({ ...user, FavoriteMovies: data.FavoriteMovies });
+				},
+				[token]
+			)
 			.catch((e) => {
 				console.log(e);
 				alert("Error adding movie to favorites");
