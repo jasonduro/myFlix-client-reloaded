@@ -37,7 +37,7 @@ export const ProfileView = ({ movies, user, token }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		fetch(`https://myflix-app-jl.herokuapp.com/users/${user.Username}`, {
-			method: "POST",
+			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${token}`,

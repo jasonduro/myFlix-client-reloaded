@@ -15,10 +15,9 @@ export function FavoriteMovies({ favoriteMovieCards }) {
 				</Col>
 			</Row>
 			<Row>
-				{favoriteMovieCards.map}
 				<Col>
 					{favoriteMovieCards.length > 0 ? (
-						<Col xs={12} style={{ border: "1px solid black" }}>
+						<Col xs={12}>
 							{favoriteMovieCards.map((movie) => (
 								<Col
 									className='mb-4'
