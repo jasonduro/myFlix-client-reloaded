@@ -20,11 +20,12 @@ export const MovieCard = ({ movie }) => {
 	);
 };
 
-/* 
 MovieCard.propTypes = {
 	movie: PropTypes.shape({
-		title: PropTypes.string,
-		director: PropTypes.string,
-	}).isRequired,
+		Title: PropTypes.string,
+		Director: PropTypes.shape({
+			Name: PropTypes.string,
+			Bio: PropTypes.string,
+		}).isRequired,
+	}),
 };
- */

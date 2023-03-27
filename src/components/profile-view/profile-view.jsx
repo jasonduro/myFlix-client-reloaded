@@ -88,9 +88,9 @@ export const ProfileView = ({ movies, user, token }) => {
 			});
 	}, [token]);
 
-	const favoriteMovieCards = movies
-		.filter((movie) => favoriteMovies.includes(movie._id))
-		.map((movie) => <MovieCard key={movie._id} movie={movie} />);
+	const favoriteMovieCards = movies.filter((movie) =>
+		favoriteMovies.includes(movie._id)
+	);
 
 	return (
 		<>
