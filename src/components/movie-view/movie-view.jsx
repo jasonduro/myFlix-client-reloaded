@@ -1,10 +1,10 @@
 // Purpose: To display a single movie's details to the user. This component is a child of the main-view component. It is rendered when the user clicks on a movie card. It displays the movie's title, director, and image. It also has a button that allows the user to return to the main view.
 
 import React from "react";
-import { useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Button, Container, Row, Col } from "react-bootstrap";
+import { useState } from "react";
 import "./movie-view.scss";
 import { useSelector } from "react-redux";
 
@@ -14,6 +14,9 @@ export const MovieView = ({ onBackClick }) => {
 	const user = JSON.parse(localStorage.getItem("user"));
 	const token = localStorage.getItem("token");
 	const movie = movies.find((m) => m._id === movieId);
+	const [favoriteMovies, setFavoriteMovies] = useState(
+		user.FavoriteMovies ? user.FavoriteMovies : []
+	);
 
 	const addOnClick = (event) => {
 		event.preventDefault();
@@ -24,19 +27,18 @@ export const MovieView = ({ onBackClick }) => {
 				method: "POST",
 				headers: {
 					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
 				},
 			}
 		)
 			.then((response) => response.json())
-			.then(
-				(data) => {
-					alert("Movie added to favorites!");
-					setUser({ ...user, FavoriteMovies: data.FavoriteMovies });
-				},
-				[token]
-			)
-			.catch((e) => {
-				console.log(e);
+			.then((data) => {
+				setFavoriteMovies(data.FavoriteMovies);
+				localStorage.setItem("user", JSON.stringify(data));
+				alert("Movie added to favorites!");
+			})
+			.catch((error) => {
+				console.log("error", error);
 				alert("Error adding movie to favorites");
 			});
 	};
@@ -50,16 +52,18 @@ export const MovieView = ({ onBackClick }) => {
 				method: "DELETE",
 				headers: {
 					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
 				},
 			}
 		)
 			.then((response) => response.json())
 			.then((data) => {
+				setFavoriteMovies(favoriteMovies.filter((m) => m !== movie._id));
+				localStorage.setItem("user", JSON.stringify(data));
 				alert("Movie removed from favorites!");
-				setUser({ ...user, FavoriteMovies: data.FavoriteMovies });
 			})
-			.catch((e) => {
-				console.log(e);
+			.catch((error) => {
+				console.log("error", error);
 				alert("Error removing movie from favorites");
 			});
 	};
