@@ -22,7 +22,6 @@ export const NavigationBar = () => {
 				<Navbar.Brand as={Link} to='/'>
 					myFlix
 				</Navbar.Brand>
-				<MoviesFilter />
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='me-auto'>
@@ -44,6 +43,7 @@ export const NavigationBar = () => {
 								<Nav.Link as={Link} to='/Profile'>
 									Profile
 								</Nav.Link>
+								<MoviesFilter />
 								<Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
 							</>
 						)}

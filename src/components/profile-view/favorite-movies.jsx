@@ -27,7 +27,7 @@ export function FavoriteMovies({ favoriteMovieCards }) {
 									md={4}
 									lg={3}
 								>
-									<MovieCard movie={movie} user={user} token={token} />
+									<MovieCard movies={movie} user={user} token={token} />
 								</Col>
 							))}
 						</Col>
