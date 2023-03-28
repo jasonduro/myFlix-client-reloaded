@@ -1,5 +1,6 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { MoviesFilter } from "../MoviesFilter/movies-filter";
 
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../redux/reducers/user";
@@ -21,6 +22,7 @@ export const NavigationBar = () => {
 				<Navbar.Brand as={Link} to='/'>
 					myFlix
 				</Navbar.Brand>
+				<MoviesFilter />
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='me-auto'>
