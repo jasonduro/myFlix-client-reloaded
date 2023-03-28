@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { MovieCard } from "../movie-card/movie-card";
-import { MoviesFilter } from "../MoviesFilter/movies-filter";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
@@ -17,9 +16,6 @@ export const MoviesList = () => {
 
 	return (
 		<>
-			<Row>
-				<MoviesFilter />
-			</Row>
 			<Row>
 				{movies.length === 0 ? (
 					<Col>The list is empty!</Col>
