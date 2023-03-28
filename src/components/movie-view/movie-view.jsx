@@ -4,15 +4,15 @@ import React from "react";
 import { useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { Button, Card, Container, Row, Col } from "react-bootstrap";
-import Image from "react-bootstrap/Image";
+import { Button, Container, Row, Col } from "react-bootstrap";
 import "./movie-view.scss";
+import { useSelector } from "react-redux";
 
-export const MovieView = ({ movies, onBackClick }) => {
-	const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-	const [token, setToken] = useState(localStorage.getItem("token"));
+export const MovieView = ({ onBackClick }) => {
 	const { movieId } = useParams();
+	const movies = useSelector((state) => state.movies.list);
+	const user = JSON.parse(localStorage.getItem("user"));
+	const token = localStorage.getItem("token");
 	const movie = movies.find((m) => m._id === movieId);
 
 	const addOnClick = (event) => {
