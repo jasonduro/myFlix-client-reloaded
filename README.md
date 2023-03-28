@@ -1,5 +1,8 @@
 # myFlix-client
-myFlix React App
+myFlix React/Redux App
+<br>
+Live Netlify Link: 
+https://myflix-app-reloaded.netlify.app/
 <br>
 Added Build Tool Parcel
 <br>
