@@ -4,7 +4,7 @@ import React from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Button, Container, Row, Col } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./movie-view.scss";
 import { useSelector } from "react-redux";
 
@@ -31,6 +31,7 @@ export const MovieView = ({ onBackClick }) => {
 				},
 			}
 		)
+		
 			.then((response) => response.json())
 			.then((data) => {
 				setFavoriteMovies(data.FavoriteMovies);

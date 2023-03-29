@@ -2,6 +2,8 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 
+
+
 export function UpdateUser({ user, handleSubmit, handleUpdate }) {
 	return (
 		<Form>

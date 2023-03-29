@@ -14,6 +14,7 @@ export const ProfileView = ({ movies, user, token }) => {
 	const [favoriteMovies, setFavoriteMovies] = useState([]);
 
 	const getUser = (token) => {
+		useEffect(() => {
 		fetch(`https://myflix-app-jl.herokuapp.com/users/${user.Username}`, {
 			method: "GET",
 			headers: {
@@ -32,10 +33,11 @@ export const ProfileView = ({ movies, user, token }) => {
 				console.log(e);
 				alert("Error getting user");
 			});
-	};
+	}, []);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		useEffect(() => {
 		fetch(`https://myflix-app-jl.herokuapp.com/users/${user.Username}`, {
 			method: "PUT",
 			headers: {
@@ -60,7 +62,7 @@ export const ProfileView = ({ movies, user, token }) => {
 				console.log(e);
 				alert("Error updating profile");
 			});
-	};
+	}, []);
 
 	const handleUpdate = (e) => {
 		e.preventDefault();
