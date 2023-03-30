@@ -13,65 +13,6 @@ export const ProfileView = ({ movies, user, token }) => {
 	const [birthday, setBirthday] = useState("");
 	const [favoriteMovies, setFavoriteMovies] = useState([]);
 
-	const getUser = (token) => {
-		useEffect(() => {
-		fetch(`https://myflix-app-jl.herokuapp.com/users/${user.Username}`, {
-			method: "GET",
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				setUsername(data.Username);
-				setPassword(data.Password);
-				setEmail(data.Email);
-				setBirthday(data.Birthday);
-				setFavoriteMovies(data.FavoriteMovies);
-			})
-			.catch((e) => {
-				console.log(e);
-				alert("Error getting user");
-			});
-	}, []);
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		useEffect(() => {
-		fetch(`https://myflix-app-jl.herokuapp.com/users/${user.Username}`, {
-			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				Username: username,
-				Password: password,
-				Email: email,
-				Birthday: birthday,
-			}),
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				alert("Profile updated!");
-
-				localStorage.setItem("user", JSON.stringify(data));
-				window.open("/client", "_self");
-			})
-			.catch((e) => {
-				console.log(e);
-				alert("Error updating profile");
-			});
-	}, []);
-
-	const handleUpdate = (e) => {
-		e.preventDefault();
-		setUsername(e.target.value);
-		setPassword(e.target.value);
-		setEmail(e.target.value);
-		setBirthday(e.target.value);
-	};
-
 	useEffect(() => {
 		fetch(`https://myflix-app-jl.herokuapp.com/users/${user.Username}`, {
 			method: "GET",
@@ -93,6 +34,67 @@ export const ProfileView = ({ movies, user, token }) => {
 	const favoriteMovieCards = movies.filter((movie) =>
 		favoriteMovies.includes(movie._id)
 	);
+
+	const getUser = (token) => {
+		useEffect(() => {
+			fetch(`https://myflix-app-jl.herokuapp.com/users/${user.Username}`, {
+				method: "GET",
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					setUsername(data.Username);
+					setPassword(data.Password);
+					setEmail(data.Email);
+					setBirthday(data.Birthday);
+					setFavoriteMovies(data.FavoriteMovies);
+				})
+				.catch((e) => {
+					console.log(e);
+					alert("Error getting user");
+				});
+		}, []);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		useEffect(() => {
+			fetch(`https://myflix-app-jl.herokuapp.com/users/${user.Username}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+				body: JSON.stringify({
+					Username: username,
+					Password: password,
+					Email: email,
+					Birthday: birthday,
+				}),
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					alert("Profile updated!");
+
+					localStorage.setItem("user", JSON.stringify(data));
+					window.open("/client", "_self");
+				})
+				.catch((e) => {
+					console.log(e);
+					alert("Error updating profile");
+				});
+		}, []);
+	};
+
+	const handleUpdate = (e) => {
+		e.preventDefault();
+		setUsername(e.target.value);
+		setPassword(e.target.value);
+		setEmail(e.target.value);
+		setBirthday(e.target.value);
+	};
 
 	return (
 		<>
