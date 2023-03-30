@@ -6,7 +6,22 @@ import { UserInfo } from "../profile-view/user-info";
 import { UpdateUser } from "../profile-view/update-user";
 import { FavoriteMovies } from "../profile-view/favorite-movies";
 
-export const ProfileView = ({ movies, user, token }) => {
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../../redux/reducers/user";
+import { setToken } from "../../redux/reducers/token";
+import { setMovies } from "../../redux/reducers/movies";
+
+export const ProfileView = () => {
+	const movies = useSelector((state) => state.movies.list);
+	const user = useSelector(
+		(state) => state.user.user || JSON.parse(localStorage.getItem("user"))
+	);
+	const token = useSelector(
+		(state) => state.token.token || localStorage.getItem("token")
+	);
+
+	const dispatch = useDispatch();
+
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [email, setEmail] = useState("");
@@ -20,10 +35,15 @@ export const ProfileView = ({ movies, user, token }) => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				setUsername(data.Username);
-				setEmail(data.Email);
-				setBirthday(data.Birthday);
-				setFavoriteMovies(data.FavoriteMovies);
+				const usersFromApi = data.users.map((user) => {
+					return {
+						Username: user.Username,
+						Password: user.Password,
+						Email: user.Email,
+						Birthday: user.Birthday,
+					};
+				});
+				dispatch(setUser(usersFromApi));
 			})
 			.catch((e) => {
 				console.log(e);
@@ -31,70 +51,9 @@ export const ProfileView = ({ movies, user, token }) => {
 			});
 	}, [token]);
 
-	const favoriteMovieCards = movies.filter((movie) =>
+	/* 	const favoriteMovieCards = movies.filter((movie) =>
 		favoriteMovies.includes(movie._id)
-	);
-
-	const getUser = (token) => {
-		useEffect(() => {
-			fetch(`https://myflix-app-jl.herokuapp.com/users/${user.Username}`, {
-				method: "GET",
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			})
-				.then((response) => response.json())
-				.then((data) => {
-					setUsername(data.Username);
-					setPassword(data.Password);
-					setEmail(data.Email);
-					setBirthday(data.Birthday);
-					setFavoriteMovies(data.FavoriteMovies);
-				})
-				.catch((e) => {
-					console.log(e);
-					alert("Error getting user");
-				});
-		}, []);
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		useEffect(() => {
-			fetch(`https://myflix-app-jl.herokuapp.com/users/${user.Username}`, {
-				method: "PUT",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${token}`,
-				},
-				body: JSON.stringify({
-					Username: username,
-					Password: password,
-					Email: email,
-					Birthday: birthday,
-				}),
-			})
-				.then((response) => response.json())
-				.then((data) => {
-					alert("Profile updated!");
-
-					localStorage.setItem("user", JSON.stringify(data));
-					window.open("/client", "_self");
-				})
-				.catch((e) => {
-					console.log(e);
-					alert("Error updating profile");
-				});
-		}, []);
-	};
-
-	const handleUpdate = (e) => {
-		e.preventDefault();
-		setUsername(e.target.value);
-		setPassword(e.target.value);
-		setEmail(e.target.value);
-		setBirthday(e.target.value);
-	};
+	); */
 
 	return (
 		<>
@@ -105,11 +64,7 @@ export const ProfileView = ({ movies, user, token }) => {
 						<Card>
 							<Card.Body>
 								<Card.Title className='mb-3'>My Profile</Card.Title>
-								<UserInfo
-									name={user.Username}
-									email={user.Email}
-									birthday={user.Birthday}
-								/>
+								<UserInfo />
 							</Card.Body>
 						</Card>
 					</Col>
@@ -117,16 +72,12 @@ export const ProfileView = ({ movies, user, token }) => {
 						<Card>
 							<Card.Body>
 								<Card.Title>Update Profile</Card.Title>
-								<UpdateUser
-									handleSubmit={handleSubmit}
-									handleUpdate={handleUpdate}
-									user={user}
-								/>
+								<UpdateUser />
 							</Card.Body>
 						</Card>
 					</Col>
 				</Row>
-				<FavoriteMovies favoriteMovieCards={favoriteMovieCards} />
+				{/* 				<FavoriteMovies favoriteMovieCards={favoriteMovieCards} /> */}
 			</Container>
 		</>
 	);
