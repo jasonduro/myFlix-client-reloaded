@@ -7,7 +7,7 @@ import { setUser } from "../../redux/reducers/user";
 import { setToken } from "../../redux/reducers/token";
 
 export const NavigationBar = () => {
-	const user = useSelector((state) => state.user);
+	const user = useSelector((state) => state.user.user);
 	const dispatch = useDispatch();
 
 	const onLoggedOut = () => {
