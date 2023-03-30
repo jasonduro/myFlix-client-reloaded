@@ -1,11 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-export function UserInfo({ name, email, birthday }) {
+export function UserInfo() {
+	const user = useSelector((state) => state.user.user);
+
 	return (
 		<div>
-			<p>Name: {name}</p>
-			<p>Email: {email}</p>
-			<p>Birthday: {birthday}</p>
+			<p>Name: {user.Username}</p>
+			<p>Email: {user.Email}</p>
+			<p>Birthday: {user.Birthday}</p>
 		</div>
 	);
 }
