@@ -17,7 +17,7 @@ export function UpdateUser({
 				<Form.Control
 					type='text'
 					name='Username'
-					defaultValue={user.Username}
+					value={user.Username}
 					onChange={(e) => handleUsernameChange(e)}
 					placeholder='New Username'
 				/>
@@ -28,7 +28,7 @@ export function UpdateUser({
 				<Form.Control
 					type='password'
 					name='password'
-					defaultValue={user.Password}
+					value={user.Password}
 					onChange={(e) => handlePasswordChange(e)}
 				/>
 			</Form.Group>
@@ -38,7 +38,7 @@ export function UpdateUser({
 				<Form.Control
 					type='email'
 					name='email'
-					defaultValue={user.Email}
+					value={user.Email}
 					onChange={(e) => handleEmailChange(e)}
 				/>
 			</Form.Group>
@@ -48,7 +48,7 @@ export function UpdateUser({
 				<Form.Control
 					type='date'
 					name='birthday'
-					defaultValue={user.Birthday}
+					value={user.Birthday}
 					onChange={(e) => handleBirthdayChange(e)}
 				/>
 			</Form.Group>
