@@ -1,14 +1,10 @@
-# myFlix-client
-myFlix React/Redux App
+# myFlix App
+- Frontend: Written with JavaScript/React; hosted on Netlify.
+- Backend (Server Logic): Written with Node/Express; hosted on Heroku.
+- Backend (Database): MongoDB for users and movies; stored in MongoDB Cloud.
 <br>
 Live Netlify Link: 
 https://myflix-app-reloaded.netlify.app/
-<br>
-Added Build Tool Parcel
-<br>
-Points to src/index.html
-<br>
-Terminal Command: `parcel src/index.html`
 
  <h2>API Documentation</h2>
         <table>
