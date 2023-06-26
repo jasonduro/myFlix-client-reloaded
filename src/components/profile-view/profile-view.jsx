@@ -13,8 +13,7 @@ export const ProfileView = ({ movies, user, token }) => {
 	const [birthday, setBirthday] = useState("");
 	const [favoriteMovies, setFavoriteMovies] = useState([]);
 
-	const getUser = (token) => {
-		useEffect(() => {
+	useEffect(() => {
 		fetch(`https://myflix-app-jl.herokuapp.com/users/${user.Username}`, {
 			method: "GET",
 			headers: {
@@ -33,11 +32,10 @@ export const ProfileView = ({ movies, user, token }) => {
 				console.log(e);
 				alert("Error getting user");
 			});
-	}, []);
+	}, [token, user.Username]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		useEffect(() => {
 		fetch(`https://myflix-app-jl.herokuapp.com/users/${user.Username}`, {
 			method: "PUT",
 			headers: {
@@ -62,33 +60,12 @@ export const ProfileView = ({ movies, user, token }) => {
 				console.log(e);
 				alert("Error updating profile");
 			});
-	}, []);
-
-	const handleUpdate = (e) => {
-		e.preventDefault();
-		setUsername(e.target.value);
-		setPassword(e.target.value);
-		setEmail(e.target.value);
-		setBirthday(e.target.value);
 	};
 
-	useEffect(() => {
-		fetch(`https://myflix-app-jl.herokuapp.com/users/${user.Username}`, {
-			method: "GET",
-			headers: { Authorization: `Bearer ${token}` },
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				setUsername(data.Username);
-				setEmail(data.Email);
-				setBirthday(data.Birthday);
-				setFavoriteMovies(data.FavoriteMovies);
-			})
-			.catch((e) => {
-				console.log(e);
-				alert("Error");
-			});
-	}, [token]);
+	const handleUsernameChange = (e) => setUsername(e.target.value);
+	const handlePasswordChange = (e) => setPassword(e.target.value);
+	const handleEmailChange = (e) => setEmail(e.target.value);
+	const handleBirthdayChange = (e) => setBirthday(e.target.value);
 
 	const favoriteMovieCards = movies.filter((movie) =>
 		favoriteMovies.includes(movie._id)
@@ -117,7 +94,10 @@ export const ProfileView = ({ movies, user, token }) => {
 								<Card.Title>Update Profile</Card.Title>
 								<UpdateUser
 									handleSubmit={handleSubmit}
-									handleUpdate={handleUpdate}
+									handleUsernameChange={handleUsernameChange}
+									handlePasswordChange={handlePasswordChange}
+									handleEmailChange={handleEmailChange}
+									handleBirthdayChange={handleBirthdayChange}
 									user={user}
 								/>
 							</Card.Body>
