@@ -2,9 +2,14 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 
-
-
-export function UpdateUser({ user, handleSubmit, handleUpdate }) {
+export function UpdateUser({
+	user,
+	handleSubmit,
+	handleUsernameChange,
+	handlePasswordChange,
+	handleEmailChange,
+	handleBirthdayChange,
+}) {
 	return (
 		<Form>
 			<Form.Group className='mt-3'>
@@ -13,7 +18,7 @@ export function UpdateUser({ user, handleSubmit, handleUpdate }) {
 					type='text'
 					name='Username'
 					defaultValue={user.Username}
-					onChange={(e) => handleUpdate(e)}
+					onChange={(e) => handleUsernameChange(e)}
 					placeholder='New Username'
 				/>
 			</Form.Group>
@@ -24,7 +29,7 @@ export function UpdateUser({ user, handleSubmit, handleUpdate }) {
 					type='password'
 					name='password'
 					defaultValue={user.Password}
-					onChange={(e) => handleUpdate(e)}
+					onChange={(e) => handlePasswordChange(e)}
 				/>
 			</Form.Group>
 
@@ -34,7 +39,7 @@ export function UpdateUser({ user, handleSubmit, handleUpdate }) {
 					type='email'
 					name='email'
 					defaultValue={user.Email}
-					onChange={(e) => handleUpdate(e)}
+					onChange={(e) => handleEmailChange(e)}
 				/>
 			</Form.Group>
 
@@ -44,7 +49,7 @@ export function UpdateUser({ user, handleSubmit, handleUpdate }) {
 					type='date'
 					name='birthday'
 					defaultValue={user.Birthday}
-					onChange={(e) => handleUpdate(e)}
+					onChange={(e) => handleBirthdayChange(e)}
 				/>
 			</Form.Group>
 			<Button
