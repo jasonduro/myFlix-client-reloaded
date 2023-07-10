@@ -3,6 +3,31 @@
 - Backend (Server Logic): Written with Node/Express; hosted on Heroku.
 - Backend (Database): MongoDB for users and movies; stored in MongoDB Cloud.
 <br>
+
+## Objective
+Using React, building on top of the API I created from the server-side, created the front-end or client-side of the application. 
+
+Live Netlify Link: 
+https://myflix-app-reloaded.netlify.app/
+
+![myFlix React](https://github.com/jasonduro/myFlix-client-reloaded/assets/38364361/1f9631d5-d4c9-4e3b-a1c3-a27eb5257dd0)
+
+## User Stories
+* As a user, I want to be able to access information about movies so that I can learn more about movies I’ve watched or am interested in.
+* As a user, I want to be able to create a profile so I can save data about my favorite movies.
+
+## Technical Requirements
+* The application must be a single-page application (SPA)
+* The application must use state routing to navigate between views and share URLs
+* The application must give users the option to filter movies using a “search” feature
+* The application must use Parcel as its build tool
+* The application must be written using the React library and in ES2015+
+* The application must use Bootstrap as a UI library for styling and responsiveness
+* The application must contain function components
+* The application must be hosted online
+* The application may use React Redux for state management of at least one feature (i.e.,
+filtering movies)
+
 Live Netlify Link: 
 https://myflix-app-reloaded.netlify.app/
 
